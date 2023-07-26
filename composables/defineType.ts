@@ -24,6 +24,8 @@ export interface HandPattern {
   isMenzenOnly: boolean; // 門前限定の役かどうか
   isKuisagari: boolean; //食い下がりのある役かどうか
   evaluator: HandEvaluator; //// 役の条件を評価する関数
+  probabilityEvaluator: ProbabilityEvaluator; // 役が完成する確率を計算する関数
 }
 
 export type HandEvaluator = (handState: HandState) => boolean;
+export type ProbabilityEvaluator = (handState: HandState) => HandProbability

@@ -1,4 +1,4 @@
-import { HandEvaluator, HandState, HandPattern, Tile } from "./defineType";
+import { HandEvaluator, ProbabilityEvaluator, HandState, HandPattern, HandProbability, Tile } from "./defineType";
 
 
 // 平和
@@ -16,6 +16,13 @@ const pinfuEvaluator: HandEvaluator = (handState: HandState) => {
   return true;
 };
 
+const pinfProbabilityEvaluator: ProbabilityEvaluator = (handState: HandState) => {
+  return{
+    hand: 'pinf',
+    probability: 10
+  }
+}
+
 //　平和のデータ構造
 const pinfu: HandPattern = {
   name:'ピンフ',
@@ -23,7 +30,8 @@ const pinfu: HandPattern = {
   isYakuMan: false,
   isMenzenOnly: true, // 門前限定の役かどうか
   isKuisagari: false,
-  evaluator: pinfuEvaluator
+  evaluator: pinfuEvaluator,
+  probabilityEvaluator: pinfProbabilityEvaluator, // 役が完成する確率を計算する関数
 }
 
 
@@ -45,6 +53,13 @@ const chiitoitsuEvaluator: HandEvaluator = (handState: HandState) => {
   return true;
 };
 
+const chiitoitsuProbabilityEvaluator: ProbabilityEvaluator = (handState: HandState) => {
+  return{
+    hand: 'chiitoitsu',
+    probability: 10
+  }
+}
+
 // チートイツのデータ構造。
 const chiitoitsu: HandPattern = {
   name: "チートイツ",
@@ -53,6 +68,7 @@ const chiitoitsu: HandPattern = {
   isMenzenOnly: true, 
   isKuisagari: false,
   evaluator: chiitoitsuEvaluator,
+  probabilityEvaluator: chiitoitsuProbabilityEvaluator, // 役が完成する確率を計算する関数
 };
 
 
