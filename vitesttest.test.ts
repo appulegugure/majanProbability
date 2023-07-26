@@ -1,6 +1,7 @@
 import { expect, it } from "vitest";
 import { useTest, yourFunction } from "composables/test";
 import { FULL_TILE_SET } from "composables/calculation"
+import { countInArray } from "composables/defineutility";
 
 it("two plus two is four", () => {
   expect(2 + 2).toBe(4);
@@ -10,6 +11,11 @@ it("execute useTest()", ()=> {
   const result = yourFunction();
   expect(result).toEqual([1, 2, 3]);
 })
+
+it("countInArray", ()=>{
+  const result = countInArray(['東1','西2','筒1','東1','索1','白2'],'東1')
+  expect(result).toEqual(2)
+});
 
 it("check full tile", ()=>{
   const defineAllTile = [
@@ -40,13 +46,13 @@ it("check full tile", ()=>{
     "索7","索7","索7","索7",
     "索8","索8","索8","索8",
     "索9","索9","索9","索9",
-    "東1","東2","東3","東4",
-    "南1","南2","南3","南4",
-    "西1","西2","西3","西4",
-    "北1","北2","北3","北4",
-    "白1","白2","白3","白4",
-    "發1","發2","發3","發4",
-    "中1","中2","中3","中4"
+    "東1","東1","東1","東1",
+    "南1","南1","南1","南1",
+    "西1","西1","西1","西1",
+    "北1","北1","北1","北1",
+    "白1","白1","白1","白1",
+    "發1","發1","發1","發1",
+    "中1","中1","中1","中1"
   ];
   expect(FULL_TILE_SET.sort()).toEqual(defineAllTile.sort())
 })

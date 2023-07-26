@@ -37,26 +37,77 @@ const pinfu: HandPattern = {
 
 // 七対子
 
-// 七対子の評価関数
+// 七対子の評価関数 [役が成立しない場合にfalse]
 const chiitoitsuEvaluator: HandEvaluator = (handState: HandState) => {
-  
-  // if (hand.length % 2 !== 0) {
-  //   return false;
-  // }
-  // const sortedHand = hand.slice().sort((a, b) => a - b);
-  // for (let i = 0; i < sortedHand.length; i += 2) {
-  //   if (sortedHand[i] !== sortedHand[i + 1]) {
-  //     return false;
-  //   }
-  // }
-  return true;
-};
+
+  const handTiles = handState.handTiles;
+
+  // 門前チェック　
+  if( handState.isMenzen === chiitoitsu.isMenzenOnly) return false
+
+  // 手牌の中に4つ以上同じ牌があればチートイツは不可能
+  for (let i = 0; i < handTiles.length; i++) {
+    if ( !checkFourOrMore( handTiles )) {
+      return false;
+    }
+  }
+
+  function checkFourOrMore(array: Tile[]): boolean {
+    const counts: { [key: string]: number } = array.reduce((acc: { [key: string]: number }, value: Tile) => {
+      const tileKey = String(value); 
+      acc[tileKey] = (acc[tileKey] || 0) + 1;
+      return acc;
+    }, {});
+
+    for (let key in counts) {
+      if (counts[key] >= 4) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  return true
+}
 
 const chiitoitsuProbabilityEvaluator: ProbabilityEvaluator = (handState: HandState) => {
-  return{
-    hand: 'chiitoitsu',
-    probability: 10
+
+  const handTiles = handState.handTiles
+  const remainingTiles = handState.remainingTiles
+
+
+  let neededPairs = 7 - countPairs(handTiles);
+
+  if (neededPairs === 0) return 1
+
+  let possiblePairs = 0;
+  for (let i = 0; i < remainingTiles.length; i++) {
+    if (countInArray(remainingTiles, remainingTiles[i]) >= 2) {
+      possiblePairs++;
+      i++;
+    }
   }
+
+
+  function countPairs(array: Tile[]): number {
+    let count = 0;
+    for (let i = 0; i < array.length; i++) {
+      if (countInArray(array, array[i]) >= 2) {
+        count++;
+        i++;
+      }
+    }
+
+    return count;
+  }
+  
+
+  return {
+    hand: "chiitoitsu",
+    probability: possiblePairs / neededPairs
+  };
+  
 }
 
 // チートイツのデータ構造。
