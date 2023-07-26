@@ -19,6 +19,7 @@ function calclateProbability(neededTiles:number):number {
   return 0
 }
 
+/*一旦コメントアウト
 function calculateProbabilities(initialHand:Hand):HandProbability[]{
 
   const probabilities: HandProbability[] = []
@@ -40,7 +41,7 @@ function calculateProbabilities(initialHand:Hand):HandProbability[]{
 
   return  probabilities.slice(0,3); 
 }
-
+*/
 
 // 全タイルの定義
 

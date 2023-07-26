@@ -2,10 +2,8 @@ export type Tile = string | number; // 牌の型定義
 
 export type Hand = Tile[]  // 手配の型定義
 
-export type HandProbability = {  // 役とその達成率を表す型定義
-  hand: string;
-  probability: number;
-}
+export type HandProbability = number  // 役とその達成率を表す型定義
+
 
 export type CompleteHand = Hand  //完成系の手配の型
 

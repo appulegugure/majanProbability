@@ -2,6 +2,8 @@ import { expect, it } from "vitest";
 import { useTest, yourFunction } from "composables/test";
 import { FULL_TILE_SET } from "composables/calculation"
 import { countInArray } from "composables/defineutility";
+import { chiitoitsuProbabilityEvaluator } from "composables/ProbabilityEvaluator/chiitoitsu";
+import { HandState } from "composables/defineType";
 
 it("two plus two is four", () => {
   expect(2 + 2).toBe(4);
@@ -16,6 +18,16 @@ it("countInArray", ()=>{
   const result = countInArray(['東1','西2','筒1','東1','索1','白2'],'東1')
   expect(result).toEqual(2)
 });
+
+it("chiitoitsu Probability", ()=> {
+  const testHandState: HandState = {
+    handTiles: ['中1','中1','東1','東1','南1','南1','筒1','筒2','筒2','筒3','筒3','筒4','筒4','筒1'],
+    remainingTiles: ['筒1','筒1','筒1','筒2','筒2','筒3','筒4','筒5','筒6','筒7','筒8','筒7','筒8'],
+    isMenzen: true
+  }
+  const result = chiitoitsuProbabilityEvaluator(testHandState)
+  expect(result).toEqual(1);
+})
 
 it("check full tile", ()=>{
   const defineAllTile = [
