@@ -48,7 +48,5 @@ it("check full tile", ()=>{
     "發1","發2","發3","發4",
     "中1","中2","中3","中4"
   ];
-  
-
   expect(FULL_TILE_SET.sort()).toEqual(defineAllTile.sort())
 })

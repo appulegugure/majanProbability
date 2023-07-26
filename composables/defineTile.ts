@@ -5,7 +5,6 @@ import { HandEvaluator, ProbabilityEvaluator, HandState, HandPattern, HandProbab
 
 // 平和の評価関数。
 const pinfuEvaluator: HandEvaluator = (handState: HandState) => {
-  // ピンフの条件を評価するロジックをここに記述します。
 
   // const sortedHand = hand.slice().sort((a, b) => a - b);
   // for (let i = 0; i < sortedHand.length - 1; i++) {
@@ -40,7 +39,7 @@ const pinfu: HandPattern = {
 
 // 七対子の評価関数
 const chiitoitsuEvaluator: HandEvaluator = (handState: HandState) => {
-  // チートイツの条件を評価するロジックをここに記述します。
+  
   // if (hand.length % 2 !== 0) {
   //   return false;
   // }
