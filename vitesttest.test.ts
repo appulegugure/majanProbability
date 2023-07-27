@@ -1,6 +1,6 @@
 import { expect, it } from "vitest";
 import { useTest, yourFunction } from "composables/test";
-import { FULL_TILE_SET } from "composables/calculation"
+import { FULL_TILE_SET } from "composables/defineTile"
 import { countInArray } from "composables/defineutility";
 import { chiitoitsuProbabilityEvaluator } from "composables/ProbabilityEvaluator/chiitoitsu";
 import { HandState } from "composables/defineType";
