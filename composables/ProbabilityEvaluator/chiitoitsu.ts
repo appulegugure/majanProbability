@@ -1,4 +1,5 @@
 import { Tile, HandState, ProbabilityEvaluator } from "composables/defineType";
+import { countInArray } from "../defineutility";
 
 interface TileWithProbability {
   tile: Tile;
@@ -26,38 +27,7 @@ export const chiitoitsuProbabilityEvaluator: ProbabilityEvaluator = ( handState:
     (acc, curr) => acc * curr,
     1
   );
-
   
-  /*
-  let neededPairs = 7 - countPairs(handTiles);
-
-  if (neededPairs === 0) return 1
-
-  let possiblePairs = 0;
-  for (let i = 0; i < remainingTiles.length; i++) {
-    if (countInArray(remainingTiles, remainingTiles[i]) >= 2) {
-      possiblePairs++;
-      i++;
-    }
-  }
-
-
-  function countPairs(array: Tile[]): number {
-    let count = 0;
-    for (let i = 0; i < array.length; i++) {
-      if (countInArray(array, array[i]) >= 2) {
-        count++;
-        i++;
-      }
-    }
-
-    return count;
-  }
-  
-
-  return possiblePairs / neededPairs //現在揃ってる
-  */
-
   return chiitoiProbability;
 };
 
