@@ -17,12 +17,12 @@ import { YAKU_MAP } from "./defineYaku";
 //   return 0
 // }
 
-  type HightScoreHandProbability = {
-    name: Tile
-    probability: number
-  }
+type HightScoreHandProbability = {
+  name: Tile
+  probability: number
+}
 
-function calculateProbabilitiesTop3(initialHand: HandState): HightScoreHandProbability[]{
+export function calculateProbabilitiesTop3(initialHand: HandState): HightScoreHandProbability[]{
 
   const probabilities: HightScoreHandProbability[] = []
 
@@ -41,44 +41,36 @@ function calculateProbabilitiesTop3(initialHand: HandState): HightScoreHandProba
 }
 
 
-// 全タイルの定義
+type dealInitial = {
+  initialHand: Hand;
+  reminingTiles: Tile[];
+}
 
-
-const allTile = FULL_TILE_SET
-
-// 手配を引いた残りのタイルの定義
-const reminingTiles: Tile[] = [...allTile];
-
-const myHand = dealInitalHand()
-
-
-function dealInitalHand(): Hand {
+// 配牌後の手配と残牌を返す
+export function dealInitalHandAndReminingTile(): dealInitial {
 
   // 最初の手配を定義
   const initialHand: Hand = []
+  const reminingTiles: Tile[] = [...FULL_TILE_SET];
 
-  // 最初の手配は残牌の中からランダムで13こ取る
-  for ( let i = 0; i < 13; i++){
-    const randomIndex = Math.floor(Math.random() * reminingTiles.length)
-    const chooseTile = reminingTiles[randomIndex]
+  // 最初の手配は残牌の中からランダムで14こ取る
+  for ( let i = 0; i < 14; i++){
+    const randomIndex: number = Math.floor(Math.random() * reminingTiles.length)
+    const chooseTile: Tile = reminingTiles[randomIndex]
+
+    // 手配に追加
     initialHand.push(chooseTile)
+
+    // 残牌から手牌分を削る
     reminingTiles.splice(randomIndex,1)
   }
 
-  // 残牌から手牌分を削る
-  for ( const tile of initialHand){
-    const index = reminingTiles.indexOf(tile)
-    if (index > -1){
-      reminingTiles.splice(index,1)
-    }
-  }
-
-  return initialHand
+  return {
+    initialHand, 
+    reminingTiles
+  };
 }
 
 
 
 
-export const useCalculation = () => {
-  return ref()
-}

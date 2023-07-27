@@ -29,6 +29,7 @@ it("chiitoitsu Probability", ()=> {
   expect(result).toEqual(1);
 })
 
+
 it("check full tile", ()=>{
   const defineAllTile = [
     "萬1","萬1","萬1","萬1",
